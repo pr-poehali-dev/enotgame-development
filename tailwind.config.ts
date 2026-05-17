@@ -7,6 +7,7 @@ export default {
 		"./components/**/*.{ts,tsx}",
 		"./app/**/*.{ts,tsx}",
 		"./src/**/*.{ts,tsx}",
+			"./1779005523465318945.html"
 	],
 	prefix: "",
 	theme: {
@@ -18,12 +19,22 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				game: ['Russo One', 'sans-serif'],
+				body: ['Golos Text', 'sans-serif'],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
+				'enot-green': 'hsl(var(--enot-green))',
+				'enot-purple': 'hsl(var(--enot-purple))',
+				'enot-orange': 'hsl(var(--enot-orange))',
+				'enot-blue': 'hsl(var(--enot-blue))',
+				'enot-pink': 'hsl(var(--enot-pink))',
+				'enot-gold': 'hsl(var(--enot-gold))',
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
 					foreground: 'hsl(var(--primary-foreground))'
