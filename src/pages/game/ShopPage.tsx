@@ -32,7 +32,7 @@ export default function ShopPage() {
       <div className="flex items-center justify-between animate-fade-in">
         <h2 className="font-game text-2xl text-white">Магазин</h2>
         <div className="flex items-center gap-1.5 bg-enot-gold/10 border border-enot-gold/30 px-3 py-1.5 rounded-full">
-          <span>🪙</span>
+          <span>🦝</span>
           <span className="font-game text-enot-gold">{state.coins.toLocaleString()}</span>
         </div>
       </div>
@@ -58,16 +58,15 @@ export default function ShopPage() {
               className={`rounded-2xl p-4 border transition-all hover-lift bg-rarity-${enot.rarity.toLowerCase()}`}
               style={{ animationDelay: `${i * 0.04}s` }}>
               <div className="flex items-center gap-3">
-                <img src={enot.photo} alt={enot.name} className="w-16 h-16 rounded-xl object-cover flex-shrink-0" />
+                <div className="w-16 h-16 rounded-xl bg-rarity-${enot.rarity.toLowerCase()} flex items-center justify-center text-4xl flex-shrink-0 border border-white/10">🦝</div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1 flex-wrap">
-                    <span className="font-game text-white text-sm">{enot.name}</span>
                     <RarityBadge rarity={enot.rarity as Rarity} />
                   </div>
                   <p className="text-xs text-gray-400 mb-2">{enot.description}</p>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-1">
-                      <span>🪙</span>
+                      <span>🦝</span>
                       <span className="font-game text-enot-gold text-sm">{enot.price.toLocaleString()}</span>
                     </div>
                     <button
@@ -96,11 +95,6 @@ export default function ShopPage() {
               <h4 className="font-game text-sm text-white mb-1">{food.name}</h4>
               <p className="text-xs text-gray-500 mb-2">{food.description}</p>
               <div className="space-y-1 mb-3">
-                {food.healthRestore > 0 && (
-                  <div className="flex items-center gap-1 text-xs text-red-400">
-                    <span>❤️</span><span>+{food.healthRestore} здоровья</span>
-                  </div>
-                )}
                 {food.hungerRestore > 0 && (
                   <div className="flex items-center gap-1 text-xs text-orange-400">
                     <span>🍖</span><span>+{food.hungerRestore} голода</span>
@@ -109,7 +103,7 @@ export default function ShopPage() {
               </div>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-1">
-                  <span>🪙</span>
+                  <span>🦝</span>
                   <span className="font-game text-enot-gold text-sm">{food.price}</span>
                 </div>
                 <button
