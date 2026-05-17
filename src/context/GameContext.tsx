@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useCallback, useEffect } from 'react';
 import type { GameState, Enot, Food, Rarity } from '@/types/game';
-import { INITIAL_ACHIEVEMENTS, ENOT_PHOTOS, RARITY_ORDER } from '@/data/gameData';
+import { INITIAL_ACHIEVEMENTS, ENOT_PHOTOS, SHOP_ENOTS, CRAFT_ITEMS, UPGRADE_CHANCES } from '@/data/gameData';
 
 const INITIAL_ENOT: Enot = {
   id: 'enot-1',
@@ -124,7 +124,6 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, []);
 
   const addEnotByRarity = useCallback((rarity: Rarity) => {
-    const { SHOP_ENOTS } = require('@/data/gameData') as { SHOP_ENOTS: typeof import('@/data/gameData').SHOP_ENOTS };
     const matching = SHOP_ENOTS.filter((e) => e.rarity === rarity);
     const base = matching[Math.floor(Math.random() * matching.length)] || SHOP_ENOTS[0];
     const newEnot: Enot = {
@@ -332,8 +331,7 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const target = field[targetRow][targetCol];
       if (!source || !target) return s;
       if (source.id !== target.id || source.level !== target.level) return s;
-      const { CRAFT_ITEMS } = require('@/data/gameData');
-      const nextItem = CRAFT_ITEMS.find((i: CraftItem) => i.level === source.level + 1);
+      const nextItem = CRAFT_ITEMS.find((i) => i.level === source.level + 1);
       if (!nextItem) return s;
       ok = true;
       field[row][col] = null;
@@ -373,7 +371,6 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setState(s => {
       const enot = s.enots.find(e => e.id === enotId);
       if (!enot) { result = { success: false, message: 'Енот не найден' }; return s; }
-      const { UPGRADE_CHANCES, SHOP_ENOTS } = require('@/data/gameData');
       const chance = UPGRADE_CHANCES[enot.rarity] ?? 0;
       const roll = Math.random();
       if (roll > chance) {
@@ -381,7 +378,7 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = ({ children
         const newEnots = s.enots.filter(e => e.id !== enotId);
         return { ...s, enots: newEnots };
       }
-      const matching = (SHOP_ENOTS as typeof import('@/data/gameData').SHOP_ENOTS).filter((e) => e.rarity === targetRarity);
+      const matching = SHOP_ENOTS.filter((e) => e.rarity === targetRarity);
       const base = matching[Math.floor(Math.random() * matching.length)];
       if (!base) { result = { success: false, message: 'Нет енотов нужной редкости' }; return s; }
       result = { success: true, message: `Успех! Енот стал ${targetRarity}!` };
